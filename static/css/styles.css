@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+        text-align: center;
+    }
+.container {
+width: 80%;
+margin: auto;
+background-color: #fff;
+padding: 20px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .content-section {
+            margin-top: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+        .section-header {
+            font-weight: bold;
+        }
+
+    .comment-text {
+        color: red;
+    }
+/* モーダルウィンドウの基本スタイル */
+.modal {
+    display: none; /* 初期状態では非表示 */
+    position: fixed; /* 画面に固定 */
+    z-index: 1; /* 他の要素より前面に */
+    left: 0;
+    top: 0;
+    width: 100%; /* 全幅 */
+    height: 100%; /* 全高 */
+    overflow: auto; /* 必要に応じてスクロール */
+    background-color: rgb(0, 0, 0); /* 背景色 */
+    background-color: rgba(0, 0, 0, 0.4); /* 透過背景 */
+}
+
+/* モーダルコンテンツ */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 中央に配置 */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* 幅 */
+}
+
+/* ロードアイコン */
+.loading-icon {
+    margin: 0 auto;
+    display: block;
+    font-size: 2em; /* アイコンサイズ */
+    color: #555; /* アイコン色 */
+    animation: spin 2s linear infinite;
+}
+
+/* アニメーション */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.download-link {
+    display: block; /* ブロック要素として表示 */
+    margin: 10px 0; /* 上下の余白 */
+    color: #007bff; /* リンクの色 */
+    text-decoration: none; /* 下線を消す */
+}
+
+.download-link:hover {
+    text-decoration: underline; /* ホバー時に下線を表示 */
+}

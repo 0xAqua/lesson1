@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload and Commenting</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <h1>Upload File for ChatGPT Analysis</h1>
+        <form id="upload-form" enctype="multipart/form-data" onsubmit="uploadFile(event)">
+            <input type="file" name="file">
+            <input type="submit" value="Upload">
+            <a id="download-link" style="margin-left: 10px;" hidden>Download Modified File</a>
+        </form>
+
+        <div class="content-section">
+            <div class="section-header">Original Content:</div>
+            <div id="original-content"></div>
+        </div>
+        <div class="content-section">
+            <div class="section-header">Modified Content:</div>
+            <div id="specification"></div>
+        </div>
+    </div>
+
+    <div id="loading" class="modal" hidden>
+        <div class="modal-content">
+            <i class="fas fa-spinner loading-icon"></i>
+            <p>Loading...</p>
+        </div>
+    </div>
+
+    <script>
+const uploadFile = (event) => {
+    event.preventDefault();
+
+    const form = document.getElementById('upload-form');
+    const formData = new FormData(form);
+    toggleLoading(true);
+
+    fetch('/upload', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        toggleLoading(false);
+        if(data.error) {
+            alert(data.error);
+        } else {
+            document.getElementById('original-content').innerHTML = data.original_content;
+            document.getElementById('specification').innerHTML = data.specification;
+
+const downloadLink = document.getElementById('download-link');
+        downloadLink.href = `/download/${data.filename}`;
+        downloadLink.hidden = false;
+        }
+    })
+    .catch(error => {
+        toggleLoading(false);
+        alert('Error: ' + error);
+    });
+};
+
+const toggleLoading = (isLoading) => {
+    const loadingElement = document.getElementById('loading');
+    loadingElement.style.display = isLoading ? 'block' : 'none';
+};
+    </script>
+</body>
+</html>
